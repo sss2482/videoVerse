@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "181347822253454",
+          status: true,
+          cookie: true,
+          xfbml: true,
+        });
+      };
+
+      function login() {
+        FB.login(
+          function (response) {
+            console.log("Response goes here!");
+          },
+          {
+            scope:
+              "read_stream,publish_stream,publish_actions,read_friendlists",
+          }
+        );
+      }
+
+      function logout() {
+        FB.logout(function (response) {
+        });
+      }
+
+      var status = FB.getLoginStatus();
+
+      console.log(status);
+    </script>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VideoVerse Login</title>
+    <link rel="icon" href="youtube/img/logo.jfif" type="image/jpeg" >
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500"
+    />
+    <!-- {%load static %} -->
+    <link
+      rel="stylesheet"
+      href="youtube/assets/bootstrap/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="youtube/assets/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="youtube/assets/css/form-elements.css" />
+    <link rel="stylesheet" href="youtube/assets/css/style.css" />
+  </head>
+  <!-- {%load static%} -->
+  <body style="background-color: black">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #666;">
+        <div class="navbar-header">
+          <a
+            class="navbar-brand"
+            href="{% url 'youtube:index'%} "
+            style="float: left; color: #fff; margin-top: 3px;"
+            title="My Tube Home"
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VideoVerse</a
+          >
+        </div>
+        <form method="GET" action="/submit/">
+          <!-- {% csrf_token %} -->
+          <input
+            name="search_key_text"
+            type="text"
+            size="85"
+            placeholder="Search Videos"
+            style="
+              margin-left: -300px;
+              margin-top: 7px;
+              margin-bottom: 7px;
+              font-size: 17px;
+              font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+              color: black;
+              height: 40px;
+            "
+            required
+          />
+          <!-- {%load static%} -->
+          <input
+            type="image"
+            src="youtube/img/search.png"
+            alt="Submit"
+            width="24"
+            height="24"
+            style="position: absolute; margin-left: -30px; margin-top: 14px"
+          />
+        </form>
+      </div>
+    </nav>
+
+    <div class="top-content">
+      <div class="inner-bg">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text">
+              <h1><strong>VideoVerse</strong> Login &amp; Register Forms</h1>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="form-box">
+                <div class="form-top">
+                  <div class="form-top-left">
+                    <h3>Login</h3>
+                    <p>Enter username and password to log in</p>
+                    <p>Not Registered please Signup</p>
+                  </div>
+                </div>
+                <div class="form-bottom">
+                  <form
+                    role="form"
+                    action="/checklogin/"
+                    method="POST"
+                    class="login-form"
+                  >
+                    <!-- {% csrf_token %} -->
+                    <div class="form-group">
+                      <label class="sr-only" for="form-username"
+                        >Username</label
+                      >
+                      <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        class="form-username form-control"
+                        id="form-username"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-password"
+                        >Password</label
+                      >
+                      <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        class="form-password form-control"
+                        id="form-password"
+                      />
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-1 middle-border"></div>
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-5">
+              <div class="form-box">
+                <div class="form-top">
+                  <div class="form-top-left">
+                    <h3>Sign Up</h3>
+                    <p>Fill in the details below to signup</p>
+                  </div>
+                </div>
+                <div class="form-bottom">
+                  <form
+                    role="form"
+                    action="/thanks/"
+                    method="POST"
+                    class="registration-form"
+                  >
+                    <!-- {% csrf_token %} -->
+                    <div class="form-group">
+                      <label class="sr-only" for="user_name">Username</label>
+                      <input
+                        type="text"
+                        name="user_name"
+                        placeholder="UserName"
+                        class="form-user-name form-control"
+                        id="form-user-name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="email">Email</label>
+                      <input type="email" name=email" placeholder="Email..."
+                      class="form-email form-control" id="form-email">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="password">Password</label>
+                      <input type="password" name=password"
+                      placeholder="Password" class="form-password form-control"
+                      id="form-password">
+                    </div>
+                    <button type="submit" class="btn">Register Now</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Javascript -->
+    <script src="youtube/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="youtube/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="youtube/assets/js/jquery.backstretch.min.js"></script>
+    <script src="youtube/assets/js/scripts.js"></script>
+  </body>
+</html>

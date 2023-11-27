@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="{% static 'youtube/img/logo.jfif' %}" type="image/jpeg" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>VideoVerse</title>
+    <link href="{% static 'youtube/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'youtube/css/portfolio-item.css' %}" rel="stylesheet">
+</head>
+
+<body style="background-color: black">
+
+    <!-- Navigation -->
+            <!-- <div id="wrapper" style="position:absolute; margin-top:-17px;"> -->
+
+        <!-- Sidebar -->
+        <!-- <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#" ">
+                        Menu
+                    </a>
+
+                </li>
+                                <hr style="border-color:red; position:relative; margin-top:0px;">
+
+                <li>
+                    <a href="#">Bookmarks</a>
+                </li>
+                <li>
+                    <a href="#">History</a>
+                </li>
+                <li>
+                    <a href="#">Subscriptions</a>
+                </li>
+                <li>
+                    <a href="#">Channels</a>
+                </li>
+                <li>
+                    <a href="#">Trending</a>
+                </li>
+                <li>
+                    <a href="#">Watch Later</a>
+                </li>
+                <li>
+                    <a href="#">Log-out</a>
+                </li>
+            </ul>
+        </div> -->
+        <!-- /#sidebar-wrapper -->
+<!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="background-color:#a7adba; width:1px;border:none; outline:0;  min-height: 100%; position:fixed; z-index:999 ;text-align: center; border-right:1px solid black; box-shadow: 5px 5px 5px #888888;" ></a> -->
+
+
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #666;">
+
+        <!-- <div class="container-fluid" style="  border-bottom: 2px solid #00b386;"> -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <img class="rotating" src="youtube/img/iitlogo.png"
+                        style="position:absolute; margin-left:-0px; margin-top:3px;
+                        width:40px; height:40px;"> -->
+                <a class="navbar-brand" href=" {% url 'youtube:index' %}" style="float:left;  color: #fff; margin-top: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VideoVerse</a>
+            </div>
+
+        <form  method="GET" action="/submit/" style="height: 12px;" >
+              <!-- {% csrf_token %} -->
+            
+            <input
+            name="search_key_text"
+            type="text"
+            size="50"
+            placeholder="Search Videos"
+            style="
+              margin-left: 60px;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              font-size: 17px;
+              font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+              color: black;
+              height: 40px;
+            "
+            required="required"
+          />
+                    <!-- <input type="submit" value="search" style="font-size: 13pt; margin:left:-20px;">
+                     -->    <input type="image" src="{% static 'youtube/img/search.png' %}" alt="Submit" width="24" height="24"
+                        style="position:absolute; margin-left:-28px; margin-top:17px;">
+        </form>
+        <ul class="nav navbar-nav " style=" float:right; font-size: 17px; margin-top: -4px;" >
+                    <li>
+                        <a href="./upload.html" style="color: #fff;">Upload</a>
+                    </li>
+                    <li>
+                        <a href="./trending.html" style="color: #fff;">Trending</a>
+                    </li>
+                    <li>
+                        <a href="" style="color: #fff;">BookMarked</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'youtube:history' %}" style="color: #fff;">History</a>
+                    </li>
+                    <li id="login" style="color: #fff;" >
+                        <a href="{% url 'youtube:login' %}">{{username}}</a>
+                    </li>
+               </ul>
+       <!--      </div>
+        -->  <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container" style="color: #fff;">
+
+        <!-- Portfolio Item Heading -->
+        <div class="row" >
+            <div class="col-lg-12">
+                <h1 class="page-header text-center " style="color: #fff;">Searched Videos
+                </h1>
+            </div>
+        </div>
+
+    {% if  flag %}
+        <h3 style="color:red; text-align: center;">did you mean: {{flag}}</h3>
+
+    {% endif %}
+        <input type="text" value="{{sq_id}}" id="sqid" hidden="true">
+    {% if message %}
+        {% for i in message|slice:"20"  %}
+            <br>
+        <a onclick="vidClick(this.id);" id="{{i.0.0.videoInfo.id}}" style="text-decoration: none; ">
+        <div class="container row" style="margin-left:100px;  border:1px solid #fff; height:230px; width:950px;">
+
+        <div class="col-lg-3" style="padding:0px; height:200px; ">
+        <img src="{{i.0.0.videoInfo.snippet.thumbnails.default.url}}" style="height:90%; width:100%; margin-top:10px;" >
+        </div>
+        <div class="col-lg-9">
+            <u><h4>{{i.0.0.videoInfo.snippet.title|slice:":50"}}</h4></u>
+            <font  color="white">
+            <p>{{i.0.0.videoInfo.snippet.description|slice:":100"}}...</p>
+            <strong>channelId :</strong> {{i.0.0.videoInfo.snippet.channelId}}...<br>
+            <strong>publishedAt : </strong>{{i.0.0.videoInfo.snippet.publishedAt}}<br>
+            <strong>liveBroadcastContent :</strong> {{i.0.0.videoInfo.snippet.liveBroadcastContent}}<br>
+            <strong>channelTitle : </strong>{{i.0.0.videoInfo.snippet.channelTitle}}<br>
+
+        <div class="row" >
+        <div class="col-xs-2">
+        <img src="{% static 'youtube/img/likee.png' %}" style="height: 30px;"><p>{{i.0.0.videoInfo.statistics.likeCount}}</p>
+        </div>
+        <div class="col-xs-2">
+        <img src="{% static 'youtube/img/dislik.png' %}" style="height: 30px;"><p>{{i.0.0.videoInfo.statistics.dislikeCount}}</p>
+        </div>
+        <div class="col-xs-2">
+        <img src="{% static 'youtube/img/vie.png' %}" style="height: 26px; margin-top: 2px;"><p>{{i.0.0.videoInfo.statistics.viewCount}}</p>
+        </div>
+        <!-- <div class="col-xs-2">
+            <img src="{% static 'youtube/img/bookmarkee.png' %}" style="height: 30px;" onclick=""><p>BookMarked</p>
+            </div> -->
+            </div>
+        </font>
+
+
+        </div>
+
+        </font-color>
+        </div>
+        </a>
+
+
+        {% endfor %}
+    {% endif %}
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="{% static 'youtube/js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'youtube/js/bootstrap.min.js' %}"></script>
+     <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    function vidClick(id){
+        si = document.getElementById('sqid');
+        fetch(`/sq/${id}/${si.value}/`, {
+            
+            // Adding method type
+            
+            
+            // Adding body or contents to send
+            // body: JSON.stringify({
+            //     vd_id: id,
+            //     sq_id: si,
+            //     // userId: 1
+            // }),
+            
+            // Adding headers to the request
+           
+        })
+        
+        // Converting to JSON
+        .then(response => response.json())
+        
+        // Displaying results to console
+        .then(json => console.log(json));
+        
+        window.location.href = `/watch/${id}/`
+    }
+    </script>
+
+</body>
+
+</html>
