@@ -1,1 +1,1 @@
-web gunicorn yt.wsgi:application --log-file -
+web: gunicorn yt.wsgi --log-file -
