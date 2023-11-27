@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as user_login, logout as user_logout
 from youtube.forms import initialSearch,userLogin,userRegistration
 import sys
-sys.path.insert(0, 'C:\IITJ\Classes\Third Year\DE\Youtube\VSE\yt\youtube\databaseCreate')
+sys.path.insert(0, 'youtube\databaseCreate')
 import didyoumean
 import mongoSearch
 import neoSearch
