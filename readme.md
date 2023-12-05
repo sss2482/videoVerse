@@ -1,8 +1,8 @@
-# This is repository for the video streaming app named videoverse.
- This is created for Data Engineering Assignment.
-### Details
-->This is created using Django.
-->It contains three data models - mysql, MongoDB and Neo4j.
+# Videoverse.
+### This is repository for the video streaming app named videoverse.
+### Details ###
+* This is created using Django.
+* It contains three data models - mysql, MongoDB and Neo4j.
 ---
 ### How to run the app
 * Clone the repository.
