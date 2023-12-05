@@ -100,20 +100,18 @@
                         style="position:absolute; margin-left:-28px; margin-top:17px;">
         </form>
         <ul class="nav navbar-nav " style=" float:right; font-size: 17px; margin-top: -4px;" >
+                    
                     <li>
-                        <a href="./upload.html" style="color: #fff;">Upload</a>
+                        <a href="{% url 'youtube:trending' %}" style="color: #fff;">Trending</a>
                     </li>
                     <li>
-                        <a href="./trending.html" style="color: #fff;">Trending</a>
-                    </li>
-                    <li>
-                        <a href="" style="color: #fff;">BookMarked</a>
+                        <a href="{% url 'youtube:bookmark' %}"  style="color: #fff;">BookMarked</a>
                     </li>
                     <li>
                         <a href="{% url 'youtube:history' %}" style="color: #fff;">History</a>
                     </li>
                     <li id="login" style="color: #fff;" >
-                        <a href="{% url 'youtube:login' %}">{{username}}</a>
+                        <a href="{% url 'youtube:logout' %}">logout</a>
                     </li>
                </ul>
        <!--      </div>

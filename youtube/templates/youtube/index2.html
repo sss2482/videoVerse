@@ -2235,20 +2235,20 @@
 <!--
                 </div>
  -->                <ul class="nav navbar-nav " style=" float:right; margin-right: 12px; font-size: 17px; margin-top: -4px;">
-                    <li>
+                    <!-- <li>
                         <a href="./upload.html" style="color: #fff;">Upload</a>
+                    </li> -->
+                    <li>
+                        <a href="{% url 'youtube:trending' %}" style="color: #fff;">Trending</a>
                     </li>
                     <li>
-                        <a href="./trending.html" style="color: #fff;">Trending</a>
-                    </li>
-                    <li>
-                        <a href="" style="color: #fff;">BookMarked</a>
+                        <a href="{% url 'youtube:bookmark' %}" style="color: #fff;">BookMarked</a>
                     </li>
                     <li>
                         <a href="{% url 'youtube:history' %}" style="color: #fff;">History</a>
                     </li>
                     <li id="login">
-                        <a href="{% url 'youtube:login' %}" style="color: #fff;">{{flag}}</a>
+                        <a href="{% url 'youtube:logout' %}" style="color: #fff;">logout</a>
                     </li>
                </ul>
        <!--      </div>
@@ -2267,7 +2267,7 @@
 
     <!-- </div> -->
 
-    <!-- {% for key,value in message.items|slice:"20" %} -->
+    {% for key,value in message.items|slice:"20" %}
 
     <a href="{% url 'youtube:watch' value.videoInfo.id %}">
     <div class="col-sm-3 col-xs-3" id="cool2">

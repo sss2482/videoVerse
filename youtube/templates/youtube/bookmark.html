@@ -76,12 +76,12 @@
 <!--
                 </div>
  -->                <ul class="nav navbar-nav " style=" float:right; font-size: 17px; margin-top: -4px;">
-                    
+
                     <li>
                         <a href="{% url 'youtube:trending' %}" style="color: #fff;">Trending</a>
                     </li>
                     <li>
-                        <a href="{% url 'youtube:bookmark' %}" " style="color: #fff;">BookMarked</a>
+                        <a href="{% url 'youtube:bookmark' %}"  style="color: #fff;">BookMarked</a>
                     </li>
                     <li>
                         <a href="{% url 'youtube:history' %}" style="color: #fff;">History</a>
@@ -98,7 +98,7 @@
 
 	<div class="container" >
         <br><br>
-    <font color="#fff" style="text-align: center;"><h2>Your History</h2></font>
+    <font color="#fff" style="text-align: center;"><h2>{{heading}}</h2></font>
     <hr>
 	 <div id="under" >
 

@@ -66,16 +66,14 @@ graph.run("MATCH (n1:NewVideo), (n2:NewVideo) WHERE n1 <> n2 AND n1.tags IS NOT 
 
 print("2nd relation inserted")
 
-# Third relation 18min. aprox
+
 graph.run("match (n1:NewVideo),(n2:NewVideo) where n1 <> n2 with n1,n2, [x in n1.description where x in n2.description ] as commonDesc where size(commonDesc) > 3  Create (n1)-[r:similarDescription {weight: size(commonDesc)}]->(n2) return count(r)")
 print("3rd relation inserted")
 
 
-#Fourth relation
+
 graph.run("match(n1:NewVideo),(n2:NewVideo) where n1<>n2 AND n1.categoryId=n2.categoryId create(n1)-[r:SAME_CATEGORY]->(n2) return count(r) ")
 print("4th relation inserted")
 
-
-#fifth relation
 graph.run("Match (n1:NewVideo),(n2:NewVideo) Where  n1 <> n2 AND n1.title is not null AND n2.title is not null with n1, n2, [x in n1.title where x in n2.title] as commontitles where size(commontitles) > 0  Create (n1)-[r:commonTitle {weight:size(commontitles)}]->(n2) return count(r)")
 print("5th relation inserted")

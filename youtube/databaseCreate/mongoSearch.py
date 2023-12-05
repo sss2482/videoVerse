@@ -5,8 +5,8 @@ from operator import itemgetter
 from collections import Counter
 conn = pymongo.MongoClient('mongodb://localhost')
 import sys
-sys.path.insert(0, '/home/sunil/Documents/assignment/gui/youtube/databaseCreate')
-import handler
+
+
 import helper
 import didyoumean
 
@@ -85,9 +85,6 @@ def search(context,user):
 		for word in search_input:
 			count_occurence+=frequency[word.lower()]
 		
-		# search_query = 
-		# similarity[obj] = (count_occurence/len(unparsed_string.split()))*20
-		# viewcounts[obj] = viewCount
 		for rank_obj in rank_scores:
 			if rank_obj[0][0]==obj:
 				score = viewCount+rank_obj[1][0]*20+(count_occurence/len(unparsed_string.split()))*20
@@ -123,3 +120,55 @@ def increase_view_count(video_id):
 		coll.update_one({'videoInfo.id':video_id},{'$set':{'videoInfo.statistics.viewCount':initial_count}})
 		# print initial_count
 		return initial_count
+
+def increase_like_count(video_id):
+	initial_count = 0
+	output=coll.find({'videoInfo.id':video_id})
+	for result in output:
+		initial_count=int(result['videoInfo']['statistics']['likeCount'])+1
+		filter_criteria = {'videoInfo.id': video_id}
+		update_operation = {'$set': {'videoInfo.statistics.vlikeCount': initial_count}}
+
+		# result = collection.update_one(filter_criteria, update_operation)
+		coll.update_one({'videoInfo.id':video_id},{'$set':{'videoInfo.statistics.likeCount':initial_count}})
+	
+	return initial_count
+
+def decrease_like_count(video_id):
+	initial_count = 0
+	output=coll.find({'videoInfo.id':video_id})
+	for result in output:
+		initial_count=int(result['videoInfo']['statistics']['likeCount'])-1
+		filter_criteria = {'videoInfo.id': video_id}
+		update_operation = {'$set': {'videoInfo.statistics.vlikeCount': initial_count}}
+
+		# result = collection.update_one(filter_criteria, update_operation)
+		coll.update_one({'videoInfo.id':video_id},{'$set':{'videoInfo.statistics.likeCount':initial_count}})
+	
+	return initial_count
+
+def increase_dislike_count(video_id):
+	initial_count = 0
+	output=coll.find({'videoInfo.id':video_id})
+	for result in output:
+		initial_count=int(result['videoInfo']['statistics']['dislikeCount'])+1
+		filter_criteria = {'videoInfo.id': video_id}
+		update_operation = {'$set': {'videoInfo.statistics.dislikeCount': initial_count}}
+
+		# result = collection.update_one(filter_criteria, update_operation)
+		coll.update_one({'videoInfo.id':video_id},{'$set':{'videoInfo.statistics.dislikeCount':initial_count}})
+	
+	return initial_count
+
+def decrease_dislike_count(video_id):
+	initial_count = 0
+	output=coll.find({'videoInfo.id':video_id})
+	for result in output:
+		initial_count=int(result['videoInfo']['statistics']['dislikeCount'])-1
+		filter_criteria = {'videoInfo.id': video_id}
+		update_operation = {'$set': {'videoInfo.statistics.dislikeCount': initial_count}}
+
+		# result = collection.update_one(filter_criteria, update_operation)
+		coll.update_one({'videoInfo.id':video_id},{'$set':{'videoInfo.statistics.dislikeCount':initial_count}})
+	
+	return initial_count

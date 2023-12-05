@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
 	<title>History</title>
 	<!-- {% load static %} -->
-    <link rel="icon" href="youtube/img/logo.jfif" type="image/jpeg" >
+    <link rel="icon" href="{% static 'youtube/img/logo.jfif' %}" type="image/jpeg" >
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,19 +13,19 @@
 
     <title>VideoVerse</title>
     <!-- {% load static %} -->
-    <link rel="stylesheet" href="footer-distributed-with-contact-form.css">
-    <link rel="stylesheet" type="text/css" href="youtube/assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="youtube/css/mystyle.css">
-    <link rel="stylesheet" type="text/css" href="youtube/css/simple-sidebar.css">
+    <link rel="stylesheet" href="{% static 'footer-distributed-with-contact-form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'youtube/assets/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'youtube/css/mystyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'youtube/css/simple-sidebar.css' %}">
     <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
     <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
 
     <!-- Bootstrap Core CSS -->
-    <link href="youtube/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'youtube/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="youtube/css/portfolio-item.css" rel="stylesheet">
+    <link href="{% static 'youtube/css/portfolio-item.css' %}" rel="stylesheet">
 </head>
 <body style="background-color: #000;">
 
@@ -69,7 +70,7 @@
             required="required"
           />
                     <!-- <input type="submit" value="search" style="font-size: 13pt; margin:left:-20px;">
-                     -->    <input type="image" src="youtube/img/search.png" alt="Submit" width="24" height="24"
+                     -->    <input type="image" src="{% static 'youtube/img/search.png' %}" alt="Submit" width="24" height="24"
                         style="position:absolute; margin-left:-28px; margin-top:17px;">
             </form>
 <!--

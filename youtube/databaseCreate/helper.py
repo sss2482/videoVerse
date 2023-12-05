@@ -25,7 +25,7 @@ def user_query_rank_scorings(query, user, objs):
     searches = Search_click.objects.filter(user=user, search_query = query)
     video_ids = [video.video_clicked for video in searches]
     video_count = Counter(video_ids)
-    # obj_ids = [obj['videoInfo']['id'] for obj in objs]
+    
     score = []
     for obj in objs:
         if obj['videoInfo']['id'] in video_ids:

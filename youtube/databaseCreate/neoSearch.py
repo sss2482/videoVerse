@@ -15,7 +15,8 @@ def search_on_click(videoId):
 	global neo_output
 	del neo_output[:]
 	id=videoId
-	run_parameter="match(n:NewVideo)-[r]->(p:NewVideo) where n.id ='"+id+"' return p"
+	
+	run_parameter="match(n:NewVideo)-[r]->(p:NewVideo) where n.id ='"+id+"' return p order by r.weight limit 20"
 	#print run_parameter
 	output=graph.run(run_parameter).data()
 	print(type(output))
@@ -25,6 +26,25 @@ def search_on_click(videoId):
 	# for obj in output:
 	# 	print (obj)
 #search_on_click(123)
+def related_videos(videoIds):
+	global neo_output
+	del neo_output[:]
+	ids=videoIds
+	if len(ids)==0:
+		list_str = '[]'
+	else:
+		list_str = '['
+		for id in ids:
+			list_str=list_str+"'"+str(id)+"'"+','
+		list_str=list_str[:-1]+']'	
+	
+	run_parameter="match(n:NewVideo)-[r]->(p:NewVideo) where n.id in "+list_str+" return p order by r.weight limit 100"
+	#print run_parameter
+	output=graph.run(run_parameter).data()
+	print(type(output))
+	# neo_output=output
+	return output
+
 current_video_info=[]
 def search_current_detail(videoId):
 	pass

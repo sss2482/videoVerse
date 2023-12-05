@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-	<link rel="icon" href="youtube/img/logo.jfif" type="image/jpeg" >
+	<link rel="icon" href="{%static 'youtube/img/logo.jfif' %}" type="image/jpeg" >
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -40,17 +40,17 @@
         var vidId = document.getElementById('vid_id').value;
         // vidId=vidId.value;
         if(dlike==0&&like==0){
-            var vidId = document.getElementById('vid_id');
+            
             var likes=document.getElementById("likeCount").innerHTML;
             document.getElementById("likeCount").innerHTML=+likes+1
             like=1;
-            response = fetch(`/like/${vidId}/${1}/`);
+            
         }
         else if(dlike==0&&like==1){
             var likes=document.getElementById("likeCount").innerHTML;
             document.getElementById("likeCount").innerHTML=+likes-1
             like=0;
-            response = fetch(`/like/${vidId}/${1}/`);
+            
         }
         else if(dlike==1&&like==0){
             var dislike=document.getElementById("dislikeCount").innerHTML;
@@ -59,8 +59,9 @@
             var likes=document.getElementById("likeCount").innerHTML;
             document.getElementById("likeCount").innerHTML=+likes+1
             like=1;
-            response = fetch(`/like/${vidId}/${1}/`);
+            
         }
+        response = fetch(`/like/${vidId}/${1}/`);
     }
     function decreaseCount(){
         var vidId = document.getElementById('vid_id').value;
@@ -91,6 +92,8 @@
 
     function bookmark(){
         var vidId = document.getElementById('vid_id').value;
+        save = document.getElementById('bookmarked').value;
+        console.log(save);
         if(save==0){
             document.getElementById("bookmark").innerHTML = "BookMarked";
             save=1;
@@ -102,6 +105,7 @@
             response = fetch(`/bookmark/${vidId}/`);
         }
     }
+    
 
 </script>
 
@@ -138,25 +142,26 @@
   					    style="position:absolute; margin-left:-28px; margin-top:17px;">
   			</form>
                <ul class="nav navbar-nav " style=" float:right; font-size: 17px; margin-top: -50px; " >
+                    
                     <li>
-                        <a href="#" style="color: #fff;">Upload</a>
+                        <a href="{% url 'youtube:trending' %}" style="color: #fff;">Trending</a>
                     </li>
                     <li>
-                        <a href="./trending.html" style="color: #fff;">Trending</a>
-                    </li>
-                    <li>
-                        <a href="" style="color: #fff;">BookMarked</a>
+                        <a href="{% url 'youtube:bookmark' %}" style="color: #fff;">BookMarked</a>
                     </li>
                     <li>
                         <a href="{% url 'youtube:history' %}" style="color: #fff;">History</a>
                     </li>
                     <li id="login"  style="color: #fff;">
-                        <a href="{% url 'youtube:login' %}">{{username}}</a>
+                        <a href="{% url 'youtube:logout' %}">logout</a>
                     </li>
                </ul>
         </div>
     </nav>
     <input type="text" value="{{current_detail.videoInfo.id}}" id="vid_id" hidden="true">
+    <input type="number" value="{{liked}}" id="liked" hidden="true">
+    <input type="number" value="{{disliked}}" id="disliked" hidden="true">
+    <input type="number" value="{{bookmarked}}" id="bookmarked" hidden="true">
     <div class="container" style="color: #fff;">
         <div class="row">
             <div class="col-lg-12">
@@ -186,10 +191,10 @@
 
             </script>
             </div>
-
+            
             <div class="col-md-4">
                 <h3>Video Description</h3>
-                <p>{{current_detail.videoInfo.snippet.description}} </p>
+                <p>{{current_detail.videoInfo.snippet.description|slice:":200"}}... </p>
                 <strong>channel id : </strong>{{current_detail.videoInfo.snippet.channelId}}<br>
                 <strong>Published At : </strong>{{current_detail.videoInfo.snippet.publishedAt}}<br>
                 <strong>Channel Title : </strong>{{current_detail.videoInfo.snippet.channelTitle}}<br>
@@ -206,7 +211,8 @@
         <img src="{%static 'youtube/img/vie.png'%}" style="height: 26px; margin-top: 2px;"><p>{{current_detail.videoInfo.statistics.viewCount}}</p>
         </div>
         <div class="col-xs-2" style="cursor: pointer;">
-            <img src="{%static 'youtube/img/bookmarkee.png'%}" id="bookmarkimg" style="height: 30px;" onclick="bookmark();"><p id="bookmark"></p>
+            
+            <img src="{%static 'youtube/img/bookmarkee.png'%}" id="bookmarkimg" style="height: 30px;" onclick="bookmark();">{% if bookmarked %}<p id="bookmark">Bookmarked</p>{% else %} <p id="bookmark"></p>{% endif %}
             </div>
             </div>
             </div>
@@ -241,6 +247,12 @@
     <script src="{%static 'youtube/js/bootstrap.min.js'%}"></script>
 
 </body>
+<script>
+    like = document.getElementById('liked').value;
+    dlike = document.getElementById('disliked').value;
+    save = document.getElementById('bookmarked').value;
+    console.log(save);
+</script>
 
 </html>
 {% endblock %}
