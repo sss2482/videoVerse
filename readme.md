@@ -1,4 +1,4 @@
-#This is repository for the video streaming app named videoverse.
+#This is repository for the video streaming app named videoverse.#
 This is created for Data Engineering Assignment.
 ###Details
 ->This is created using Django.
