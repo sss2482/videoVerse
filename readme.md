@@ -1,5 +1,10 @@
 # Videoverse.
 ### This is repository for the video streaming app named videoverse.
+### Members ###
+* Sadineni Lasya Sree (B21AI033)
+* Bhukya Krishnaveni (B21AI008)
+* Sakam SaiSanthosh (B21AI035)
+* Nakkina Vinay (B21AI023)
 ### Details ###
 * This is created using Django.
 * It contains three data models - mysql, MongoDB and Neo4j.
